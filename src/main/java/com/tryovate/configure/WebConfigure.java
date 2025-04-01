@@ -13,6 +13,6 @@ public class WebConfigure implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:5173")  // Allow React app URL here
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
-                .allowCredentials(true);;
+                .allowCredentials(true);
     }
 }

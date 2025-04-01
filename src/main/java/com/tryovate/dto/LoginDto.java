@@ -1,12 +1,12 @@
 package com.tryovate.dto;
 
-public class LoginResponse {
+public class LoginDto {
 
     private String message;
     private boolean success;
 
     // Constructor, getters, and setters
-    public LoginResponse(String message, boolean success) {
+    public LoginDto(String message, boolean success) {
         this.message = message;
         this.success = success;
     }

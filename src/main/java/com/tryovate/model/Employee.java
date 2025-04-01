@@ -1,63 +1,70 @@
 package com.tryovate.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import jakarta.validation.constraints.Pattern;
+import lombok.*;
+
 
 @Data
+
 @Entity
-@Table(name = "Employee", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"email", "contactNumber", "aadharCard", "panCard"})
-})
+@Table(name = "Employee")
 public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "full Name",nullable = false)
+    @Column(name = "full Name")
     private String fullName;
 
-   @Column(name = "DOB",nullable = false)
+   @Column(name = "DOB")
     private String dob;;
 
-    @Column(name = "Gender",nullable = false)
+    @Column(name = "Gender")
     private String gender;
 
-    @Column(name = "Contact Number",nullable = false)
+    @Column(name = "Contact Number")
     private String contactNumber;
 
-    @Column(name = "Email",nullable = false)
+    @Column(name = "Email")
     private String email;
 
-    @Column(name = "Current Address",nullable = false)
+    @Column(name = "Current Address")
     private String currentAddress;
 
-    @Column(name = "permanent Address",nullable = false)
+    @Column(name = "permanent Address")
     private String permanentAddress;
 
-    @Column(name = "Mother Name",nullable = false)
+    @Column(name = "Mother Name")
     private String motherName;
 
-    @Column(name = "Father Name",nullable = false)
+    @Column(name = "Father Name")
     private String fatherName;
 
-    @Column(name = "Alternate Number",nullable = false)
+    @Column(name = "Alternate Number")
+    @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
     private String alternateNumber;
 
-    @Column(name = "Aadhar Card",nullable = false)
+    @Column(name = "Aadhar Card")
     private String aadharCard;
 
-    @Column(name = "Pan Card",nullable = false)
+    @Column(name = "Pan Card")
     private String panCard;
 
-    @Column(name = "Reference Name",nullable = false)
+    @Column(name = "Reference Name")
     private String reference;
 
     private String highestDegree;
+
     private String universityCollegeName;
+
     private int yearOfPassing;
+
     private String specializationMajor;
+
     private double percentageCgpa;
+
     private String longMemo;
 
     private String selectedCourse;

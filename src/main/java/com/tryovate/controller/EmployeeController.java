@@ -1,7 +1,9 @@
 package com.tryovate.controller;
 
+import com.tryovate.dto.EmployeeDto;
 import com.tryovate.model.Employee;
 import com.tryovate.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +18,11 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @PostMapping("/Employee-details")
-    public ResponseEntity<Employee> submitPersonalDetails(@RequestBody Employee employee) {
+    @PostMapping("/add-candidate")
+    public ResponseEntity<EmployeeDto> submitPersonalDetails(@Valid @RequestBody EmployeeDto employeeDto) {
         try {
 
-            Employee savedDetails = employeeService.saveEmployee(employee);
+            EmployeeDto savedDetails = employeeService.saveEmployee(employeeDto);
 
             return new ResponseEntity<>(savedDetails, HttpStatus.CREATED);
         } catch (Exception e) {

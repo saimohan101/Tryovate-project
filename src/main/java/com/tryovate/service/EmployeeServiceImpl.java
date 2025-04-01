@@ -1,5 +1,8 @@
 package com.tryovate.service;
 
+import com.tryovate.dto.EmployeeDto;
+import com.tryovate.exception.EmployeeAlreadyExistsException;
+import com.tryovate.mapper.EmployeeMapper;
 import com.tryovate.model.Employee;
 import com.tryovate.repository.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +18,18 @@ public class EmployeeServiceImpl implements EmployeeService{
     private EmployeeRepo employeeRepo;
 
     @Override
-    public Employee saveEmployee(Employee employee) {
-        return employeeRepo.save(employee);
+    public EmployeeDto saveEmployee(EmployeeDto employeeDto) {
+        Employee employee = EmployeeMapper.mapToEmployee(employeeDto, new Employee());
+        Optional<Employee> optionalEmployee = employeeRepo.findByEmail(employeeDto.getEmail());
+        if (optionalEmployee.isPresent()) {
+            throw new EmployeeAlreadyExistsException("Employee already Exist with given email Id "
+                    + employee.getEmail());
+        }
+        Employee savedEmployee = employeeRepo.save(employee);
+
+        EmployeeDto savedEmployeeDto = EmployeeMapper.mapToEmployeeDto(savedEmployee);
+           return savedEmployeeDto;
+
     }
 
     public Employee get(long id) {
