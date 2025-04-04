@@ -8,12 +8,11 @@ import lombok.*;
 @Data
 
 @Entity
-@Table(name = "Employee")
-public class Employee {
+@Table(name = "Candidate")
+public class Candidate {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
     @Column(name = "full Name")
     private String fullName;
@@ -43,7 +42,6 @@ public class Employee {
     private String fatherName;
 
     @Column(name = "Alternate Number")
-    @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
     private String alternateNumber;
 
     @Column(name = "Aadhar Card")
@@ -71,10 +69,10 @@ public class Employee {
 
     private String paymentType;
 
-    public Employee() {
+    public Candidate() {
     }
 
-    public Employee(String aadharCard, String alternateNumber, String contactNumber, String currentAddress, String dob, String email, String fatherName, String fullName, String gender, String highestDegree, long id, String longMemo, String motherName, String panCard, String paymentType, double percentageCgpa, String permanentAddress, String reference, String selectedCourse, String specializationMajor, String universityCollegeName, int yearOfPassing) {
+    public Candidate(String aadharCard, String alternateNumber, String contactNumber, String currentAddress, String dob, String email, String fatherName, String fullName, String gender, String highestDegree, String id, String longMemo, String motherName, String panCard, String paymentType, double percentageCgpa, String permanentAddress, String reference, String selectedCourse, String specializationMajor, String universityCollegeName, int yearOfPassing) {
         this.aadharCard = aadharCard;
         this.alternateNumber = alternateNumber;
         this.contactNumber = contactNumber;
@@ -179,11 +177,11 @@ public class Employee {
         this.highestDegree = highestDegree;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
