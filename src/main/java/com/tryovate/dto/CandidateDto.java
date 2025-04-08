@@ -6,19 +6,24 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Data
 @Getter @Setter
 public class CandidateDto {
+
+    private String id;
 
     @NotEmpty(message = "Name can not be a null or empty")
     @Size(min = 3, max = 30, message = "The length of the customer name should be between 5 and 30")
     private String fullName;
 
-    @Column(name = "DOB",nullable = false)
-    private String dob;;
+    @Column(name = "DOB", nullable = false)
+    private String dob;
+    ;
 
     @NotEmpty(message = "Gender can not be a null or empty")
-    @Column(name = "Gender",nullable = false)
+    @Column(name = "Gender", nullable = false)
     private String gender;
 
     @NotEmpty(message = "you must enter your contact number")
@@ -74,13 +79,55 @@ public class CandidateDto {
     private double percentageCgpa;
 
     private String longMemo;
+    // course names from frontend
+//    private List<String> selectedCourses;
+    private List<String> selectedCourse;
+    private String paymentType; // FULL or PARTIAL
+    private String paymentMode; // ONLINE or OFFLINE
+    private double partialPaidAmount; // optional for partial payments
+    private Double totalPayableAmount;
+    private double remainingAmount;
 
-    @NotEmpty(message = "Course can not be a null or empty")
-    private String selectedCourse;
 
-    private String paymentType;
+    public CandidateDto() {
+    }
 
+    public CandidateDto(String id, String aadharCard, String alternateNumber, String contactNumber, String currentAddress, String dob, String email, String fatherName, String fullName, String gender, String highestDegree, String longMemo, String motherName, String panCard, double partialPaidAmount, String paymentMode, String paymentType, double percentageCgpa, String permanentAddress, String reference, double remainingAmount, List<String> selectedCourse, String specializationMajor, Double totalPayableAmount, String universityCollegeName, int yearOfPassing) {
+        this.id = id;
+        this.aadharCard = aadharCard;
+        this.alternateNumber = alternateNumber;
+        this.contactNumber = contactNumber;
+        this.currentAddress = currentAddress;
+        this.dob = dob;
+        this.email = email;
+        this.fatherName = fatherName;
+        this.fullName = fullName;
+        this.gender = gender;
+        this.highestDegree = highestDegree;
+        this.longMemo = longMemo;
+        this.motherName = motherName;
+        this.panCard = panCard;
+        this.partialPaidAmount = partialPaidAmount;
+        this.paymentMode = paymentMode;
+        this.paymentType = paymentType;
+        this.percentageCgpa = percentageCgpa;
+        this.permanentAddress = permanentAddress;
+        this.reference = reference;
+        this.remainingAmount = remainingAmount;
+        this.selectedCourse = selectedCourse;
+        this.specializationMajor = specializationMajor;
+        this.totalPayableAmount = totalPayableAmount;
+        this.universityCollegeName = universityCollegeName;
+        this.yearOfPassing = yearOfPassing;
+    }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
     public @NotEmpty(message = "Aadhar card number cannot be null or empty") @Pattern(regexp = "^[0-9]{12}$", message = "Aadhar card number must be 12 digits") String getAadharCard() {
         return aadharCard;
     }
@@ -137,11 +184,11 @@ public class CandidateDto {
         this.fatherName = fatherName;
     }
 
-    public @NotEmpty(message = "Name can not be a null or empty") String getFullName() {
+    public @NotEmpty(message = "Name can not be a null or empty") @Size(min = 3, max = 30, message = "The length of the customer name should be between 5 and 30") String getFullName() {
         return fullName;
     }
 
-    public void setFullName(@NotEmpty(message = "Name can not be a null or empty") String fullName) {
+    public void setFullName(@NotEmpty(message = "Name can not be a null or empty") @Size(min = 3, max = 30, message = "The length of the customer name should be between 5 and 30") String fullName) {
         this.fullName = fullName;
     }
 
@@ -185,6 +232,22 @@ public class CandidateDto {
         this.panCard = panCard;
     }
 
+    public double getPartialPaidAmount() {
+        return partialPaidAmount;
+    }
+
+    public void setPartialPaidAmount(double partialPaidAmount) {
+        this.partialPaidAmount = partialPaidAmount;
+    }
+
+    public String getPaymentMode() {
+        return paymentMode;
+    }
+
+    public void setPaymentMode(String paymentMode) {
+        this.paymentMode = paymentMode;
+    }
+
     public String getPaymentType() {
         return paymentType;
     }
@@ -218,11 +281,19 @@ public class CandidateDto {
         this.reference = reference;
     }
 
-    public @NotEmpty(message = "Course can not be a null or empty") String getSelectedCourse() {
+    public double getRemainingAmount() {
+        return remainingAmount;
+    }
+
+    public void setRemainingAmount(double remainingAmount) {
+        this.remainingAmount = remainingAmount;
+    }
+
+    public List<String> getSelectedCourse() {
         return selectedCourse;
     }
 
-    public void setSelectedCourse(@NotEmpty(message = "Course can not be a null or empty") String selectedCourse) {
+    public void setSelectedCourse(List<String> selectedCourse) {
         this.selectedCourse = selectedCourse;
     }
 
@@ -232,6 +303,14 @@ public class CandidateDto {
 
     public void setSpecializationMajor(@NotEmpty(message = "specialization can not be a null or empty") String specializationMajor) {
         this.specializationMajor = specializationMajor;
+    }
+
+    public Double getTotalPayableAmount() {
+        return totalPayableAmount;
+    }
+
+    public void setTotalPayableAmount(Double totalPayableAmount) {
+        this.totalPayableAmount = totalPayableAmount;
     }
 
     public @NotEmpty(message = "university/CollegeName can not be a null or empty") String getUniversityCollegeName() {

@@ -61,7 +61,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ResponseDto> handleCandidateNotFoundException(CandidateNotFoundException ex) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body(new ResponseDto(CandidateConstants.STATUS_500, ex.getMessage()));
+                .body(new ResponseDto(CandidateConstants.STATUS_404, ex.getMessage()));
     }
 
     @ExceptionHandler(NoCandidatesFoundException.class)

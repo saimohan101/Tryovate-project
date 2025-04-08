@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
+import java.util.List;
+
 
 @Data
 
@@ -17,8 +19,9 @@ public class Candidate {
     @Column(name = "full Name")
     private String fullName;
 
-   @Column(name = "DOB")
-    private String dob;;
+    @Column(name = "DOB")
+    private String dob;
+    ;
 
     @Column(name = "Gender")
     private String gender;
@@ -68,11 +71,29 @@ public class Candidate {
     private String selectedCourse;
 
     private String paymentType;
+    private String paymentMode;
+    private double partialPaidAmount;
+    private double totalPayableAmount;
+    private double remainingAmount;
+
+//    @ManyToMany
+//    @JoinTable(
+//            name = "candidate_courses",
+//            joinColumns = @JoinColumn(name = "candidate_id"),
+//            inverseJoinColumns = @JoinColumn(name = "course_id")
+//    )
+//    private List<Course> selectedCourses;
+//    private String paymentType; // FULL or PARTIAL
+//    private String paymentMode; // ONLINE or OFFLIN
+//    private double partialPaidAmount;
+//    private Double totalPayableAmount;
+//
+//    private double remainingAmount;
 
     public Candidate() {
     }
 
-    public Candidate(String aadharCard, String alternateNumber, String contactNumber, String currentAddress, String dob, String email, String fatherName, String fullName, String gender, String highestDegree, String id, String longMemo, String motherName, String panCard, String paymentType, double percentageCgpa, String permanentAddress, String reference, String selectedCourse, String specializationMajor, String universityCollegeName, int yearOfPassing) {
+    public Candidate(String aadharCard, String alternateNumber, String contactNumber, String currentAddress, String dob, String email, String fatherName, String fullName, String gender, String highestDegree, String id, String longMemo, String motherName, String panCard, double partialPaidAmount, String paymentMode, String paymentType, double percentageCgpa, String permanentAddress, String reference, double remainingAmount, String selectedCourse, String specializationMajor, double totalPayableAmount, String universityCollegeName, int yearOfPassing) {
         this.aadharCard = aadharCard;
         this.alternateNumber = alternateNumber;
         this.contactNumber = contactNumber;
@@ -87,12 +108,16 @@ public class Candidate {
         this.longMemo = longMemo;
         this.motherName = motherName;
         this.panCard = panCard;
+        this.partialPaidAmount = partialPaidAmount;
+        this.paymentMode = paymentMode;
         this.paymentType = paymentType;
         this.percentageCgpa = percentageCgpa;
         this.permanentAddress = permanentAddress;
         this.reference = reference;
+        this.remainingAmount = remainingAmount;
         this.selectedCourse = selectedCourse;
         this.specializationMajor = specializationMajor;
+        this.totalPayableAmount = totalPayableAmount;
         this.universityCollegeName = universityCollegeName;
         this.yearOfPassing = yearOfPassing;
     }
@@ -209,6 +234,22 @@ public class Candidate {
         this.panCard = panCard;
     }
 
+    public double getPartialPaidAmount() {
+        return partialPaidAmount;
+    }
+
+    public void setPartialPaidAmount(double partialPaidAmount) {
+        this.partialPaidAmount = partialPaidAmount;
+    }
+
+    public String getPaymentMode() {
+        return paymentMode;
+    }
+
+    public void setPaymentMode(String paymentMode) {
+        this.paymentMode = paymentMode;
+    }
+
     public String getPaymentType() {
         return paymentType;
     }
@@ -241,6 +282,14 @@ public class Candidate {
         this.reference = reference;
     }
 
+    public double getRemainingAmount() {
+        return remainingAmount;
+    }
+
+    public void setRemainingAmount(double remainingAmount) {
+        this.remainingAmount = remainingAmount;
+    }
+
     public String getSelectedCourse() {
         return selectedCourse;
     }
@@ -257,6 +306,14 @@ public class Candidate {
         this.specializationMajor = specializationMajor;
     }
 
+    public double getTotalPayableAmount() {
+        return totalPayableAmount;
+    }
+
+    public void setTotalPayableAmount(double totalPayableAmount) {
+        this.totalPayableAmount = totalPayableAmount;
+    }
+
     public String getUniversityCollegeName() {
         return universityCollegeName;
     }
@@ -271,33 +328,5 @@ public class Candidate {
 
     public void setYearOfPassing(int yearOfPassing) {
         this.yearOfPassing = yearOfPassing;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "aadharCard='" + aadharCard + '\'' +
-                ", id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", dob=" + dob +
-                ", gender='" + gender + '\'' +
-                ", contactNumber='" + contactNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", currentAddress='" + currentAddress + '\'' +
-                ", permanentAddress='" + permanentAddress + '\'' +
-                ", motherName='" + motherName + '\'' +
-                ", fatherName='" + fatherName + '\'' +
-                ", alternateNumber='" + alternateNumber + '\'' +
-                ", panCard='" + panCard + '\'' +
-                ", reference='" + reference + '\'' +
-                ", highestDegree='" + highestDegree + '\'' +
-                ", universityCollegeName='" + universityCollegeName + '\'' +
-                ", yearOfPassing=" + yearOfPassing +
-                ", specializationMajor='" + specializationMajor + '\'' +
-                ", percentageCgpa=" + percentageCgpa +
-                ", longMemo='" + longMemo + '\'' +
-                ", selectedCourse='" + selectedCourse + '\'' +
-                ", paymentType='" + paymentType + '\'' +
-                '}';
     }
 }

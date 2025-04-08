@@ -28,7 +28,7 @@ public interface CandidateService {
 
     public CandidateDto getCandidateById(String id);
 
-    List<Candidate> getAllCandidates();
+    public List<CandidateDto> getAllCandidates();
 
     CandidateDto updateCandidate(String id, CandidateDto candidateDto);
 

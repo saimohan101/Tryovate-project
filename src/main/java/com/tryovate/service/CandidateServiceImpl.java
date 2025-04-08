@@ -1,12 +1,15 @@
 package com.tryovate.service;
 
+import com.tryovate.constants.CourseFeeConstants;
 import com.tryovate.dto.CandidateDto;
 import com.tryovate.exception.CandidateAlreadyExistsException;
 import com.tryovate.exception.CandidateNotFoundException;
 import com.tryovate.exception.NoCandidatesFoundException;
 import com.tryovate.mapper.CandidateMapper;
 import com.tryovate.model.Candidate;
+import com.tryovate.model.Course;
 import com.tryovate.repository.CandidateRepo;
+import com.tryovate.repository.CourseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,9 @@ public class CandidateServiceImpl implements CandidateService {
     @Autowired
     private CandidateRepo candidateRepo;
 
+    @Autowired
+    private CourseRepo courseRepo;
+
     @Override
     public void saveCandidateDto(CandidateDto candidateDto) {
 
@@ -29,10 +35,58 @@ public class CandidateServiceImpl implements CandidateService {
                 throw new CandidateAlreadyExistsException("email already exist "
                         +candidateDto.getEmail());
             }
-            Candidate candidate = CandidateMapper.mapToCandidate(candidateDto, new Candidate());
-            candidate.setId(generateCandidateId());
 
-    candidateRepo.save(candidate);
+//        if (candidateDto.getSelectedCourses() == null || candidateDto.getSelectedCourses().isEmpty()) {
+//            throw new IllegalArgumentException("Selected courses must not be null or empty");
+//        }
+
+        Candidate candidate = CandidateMapper.mapToCandidate(candidateDto,new Candidate());
+        candidate.setId(generateCandidateId()); // your existing ID generator
+        candidateRepo.save(candidate);
+
+
+  //      for logic
+//        double totalCourseFee = 0.0;
+//        for (String courseName : candidateDto.getSelectedCourses()) {
+//            totalCourseFee += CourseFeeConstants.getFeeByCourseName(courseName);
+//        }
+//
+//        double gst = 0.0;
+//        double payableAmount = 0.0;
+//        double paidAmount = 0.0;
+//        double remainingAmount = 0.0;
+//
+//        if ("FULL".equalsIgnoreCase(candidateDto.getPaymentType())) {
+//            if ("ONLINE".equalsIgnoreCase(candidateDto.getPaymentMode())) {
+//                gst = totalCourseFee * CourseFeeConstants.GST_PERCENTAGE;
+//            }
+//            payableAmount = totalCourseFee + gst;
+//            paidAmount = payableAmount; // full payment
+//            remainingAmount = 0.0;
+//
+//        } else if ("PARTIAL".equalsIgnoreCase(candidateDto.getPaymentType())) {
+//            if ("ONLINE".equalsIgnoreCase(candidateDto.getPaymentMode())) {
+//                gst = totalCourseFee * CourseFeeConstants.GST_PERCENTAGE;
+//                totalCourseFee += gst;
+//            }
+//            payableAmount = candidateDto.getPartialPaidAmount();
+//            remainingAmount = totalCourseFee - payableAmount;
+//        }
+//
+//        // Set calculated values into DTO
+//        candidateDto.setTotalPayableAmount(payableAmount);
+//        candidateDto.setPartialPaidAmount(paidAmount);
+//        candidateDto.setRemainingAmount(remainingAmount);
+//
+//        Candidate candidate = CandidateMapper.mapToCandidate(candidateDto, new Candidate(), courseRepo);
+//        candidate.setPartialPaidAmount(paidAmount);
+//        candidate.setTotalPayableAmount(payableAmount);
+//        candidate.setRemainingAmount(remainingAmount);
+//
+//
+//        candidate.setId(generateCandidateId());
+//
+//    candidateRepo.save(candidate);
 
     }
 
@@ -146,7 +200,6 @@ public class CandidateServiceImpl implements CandidateService {
         candidate.setSpecializationMajor(candidateDto.getSpecializationMajor());
         candidate.setPercentageCgpa(candidateDto.getPercentageCgpa());
         candidate.setLongMemo(candidateDto.getLongMemo());
-        candidate.setSelectedCourse(candidateDto.getSelectedCourse());
         candidate.setPaymentType(candidateDto.getPaymentType());
 
         Candidate updatedCandidate = candidateRepo.save(candidate);
@@ -163,12 +216,13 @@ public class CandidateServiceImpl implements CandidateService {
 
 
     @Override
-    public List<Candidate> getAllCandidates() {
+    public List<CandidateDto> getAllCandidates() {
         List<Candidate> candidates = candidateRepo.findAll();
         if (candidates.isEmpty()) {
             throw new NoCandidatesFoundException("No candidates available");
         }
-        return candidates; // Return full Candidate objects
+        return candidates.stream()
+                .map(CandidateMapper::mapToCandidateDto)
+                .collect(Collectors.toList());
     }
-
     }

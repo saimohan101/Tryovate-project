@@ -60,9 +60,9 @@ public class CandidateController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<Candidate>> getAllCandidates() {
-        List<Candidate> candidates = candidateService.getAllCandidates();
-        return ResponseEntity.ok(candidates);
+    public ResponseEntity<List<CandidateDto>> getAllCandidates() {
+        List<CandidateDto> candidateDto = candidateService.getAllCandidates();
+        return ResponseEntity.ok(candidateDto);
     }
 
     @DeleteMapping("/delete/{id}")
