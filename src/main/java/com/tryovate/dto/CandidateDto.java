@@ -14,78 +14,88 @@ public class CandidateDto {
 
     private String id;
 
-    @NotEmpty(message = "Name can not be a null or empty")
-    @Size(min = 3, max = 30, message = "The length of the customer name should be between 5 and 30")
+//    @NotBlank(message = "Full name is required")
+//    @Size(min = 3, max = 30, message = "The length of the candidate name should be between 5 and 30")
     private String fullName;
 
-    @Column(name = "DOB", nullable = false)
+//    @NotBlank(message = "Gender is required")
     private String dob;
     ;
 
-    @NotEmpty(message = "Gender can not be a null or empty")
-    @Column(name = "Gender", nullable = false)
+//    @NotBlank(message = "Gender is required")
     private String gender;
 
-    @NotEmpty(message = "you must enter your contact number")
-    @Pattern(regexp = "^[0-9]{10}$", message = "Mobile number must be 10 digits")
+//    @NotBlank(message = "Contact number is required")
+//    @Pattern(regexp = "^[6-9]\\d{9}$", message = "Invalid contact number")
     private String contactNumber;
 
-    @NotEmpty(message = "Email address can not be a null or empty")
-    @Email(message = "Email address should be a valid value")
+//    @NotBlank(message = "Email is required")
+//    @Email(message = "Invalid email format")
     private String email;
 
-    @NotEmpty(message = "your address can not be a null or empty")
+//    @NotBlank(message = "Current address is required")
     private String currentAddress;
 
 
     private String permanentAddress;
 
-    @NotEmpty(message = "Mother Name can not be a null or empty")
+//    @NotBlank(message = "Mother's name is required")
     private String motherName;
 
-    @NotEmpty(message = "Father Name can not be a null or empty")
+//    @NotBlank(message = "Father's name is required")
     private String fatherName;
 
 
-    @Pattern(regexp = "^[0-9]{10}$", message = "Alternate mobile number must be 10 digits")
+//    @NotBlank(message = "Contact number is required")
+//    @Pattern(regexp = "^[6-9]\\d{9}$", message = "Invalid contact number")
     private String alternateNumber;
 
-    @NotEmpty(message = "Aadhar card number cannot be null or empty")
-    @Pattern(regexp = "^[0-9]{12}$", message = "Aadhar card number must be 12 digits")
+//    @NotBlank(message = "Aadhar card number is required")
+//    @Pattern(regexp = "^\\d{12}$", message = "Invalid Aadhar number")
     private String aadharCard;
 
-    @NotEmpty(message = "Pan card number cannot be null or empty")
-    @Pattern(regexp = "^[A-Z]{5}[0-9]{4}[A-Z]{1}$", message = "Pan card number should be in the format XXXXX9999X")
+//    @NotBlank(message = "PAN card number is required")
+//    @Pattern(regexp = "^[A-Z]{5}[0-9]{4}[A-Z]$", message = "Invalid PAN number")
     private String panCard;
 
     private String reference;
 
-    @NotEmpty(message = "highest Degree can not be a null or empty")
+//    @NotBlank(message = "Highest degree is required")
     private String highestDegree;
 
-    @NotEmpty(message = "university/CollegeName can not be a null or empty")
+//    @NotBlank(message = "University/College name is required")
     private String universityCollegeName;
 
-    @NotNull(message = "Year of passing cannot be null")
-//    @Pattern(regexp = "^[0-9]{4}$", message = "Year of passing must be a 4-digit value")
+//    @NotNull(message = "Year of passing is required")
     private int yearOfPassing;
 
-    @NotEmpty(message = "specialization can not be a null or empty")
+//    @NotBlank(message = "Specialization is required")
     private String specializationMajor;
 
-    @NotNull(message = "Percentage/CGPA cannot be null")
-//    @Min(value = 0, message = "Percentage/CGPA must be at least 0")
-//    @Max(value = 100, message = "Percentage must be at most 100")
+//    @NotNull(message = "Percentage/CGPA is required")
+//    @DecimalMin(value = "0.0", inclusive = false, message = "Percentage must be greater than 0")
     private double percentageCgpa;
 
     private String longMemo;
-    // course names from frontend
-//    private List<String> selectedCourses;
+
+//    @NotNull(message = "Selected courses must not be null")
+//    @Size(min = 1, message = "At least one course must be selected")
     private List<String> selectedCourse;
+
+//    @NotBlank(message = "Payment type is required")
     private String paymentType; // FULL or PARTIAL
+
+//    @NotBlank(message = "Payment mode is required")
     private String paymentMode; // ONLINE or OFFLINE
+
+//    @NotNull(message = "Partial paid amount is required")
+//    @PositiveOrZero(message = "Partial paid amount must be zero or positive")
     private double partialPaidAmount; // optional for partial payments
+
+//    @NotNull(message = "Total payable amount is required")
+//    @Positive(message = "Total payable amount must be greater than zero")
     private Double totalPayableAmount;
+
     private double remainingAmount;
 
 
@@ -121,42 +131,35 @@ public class CandidateDto {
         this.yearOfPassing = yearOfPassing;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-    public @NotEmpty(message = "Aadhar card number cannot be null or empty") @Pattern(regexp = "^[0-9]{12}$", message = "Aadhar card number must be 12 digits") String getAadharCard() {
+    public String getAadharCard() {
         return aadharCard;
     }
 
-    public void setAadharCard(@NotEmpty(message = "Aadhar card number cannot be null or empty") @Pattern(regexp = "^[0-9]{12}$", message = "Aadhar card number must be 12 digits") String aadharCard) {
+    public void setAadharCard(String aadharCard) {
         this.aadharCard = aadharCard;
     }
 
-    public @Pattern(regexp = "^[0-9]{10}$", message = "Alternate mobile number must be 10 digits") String getAlternateNumber() {
+    public String getAlternateNumber() {
         return alternateNumber;
     }
 
-    public void setAlternateNumber(@Pattern(regexp = "^[0-9]{10}$", message = "Alternate mobile number must be 10 digits") String alternateNumber) {
+    public void setAlternateNumber(String alternateNumber) {
         this.alternateNumber = alternateNumber;
     }
 
-    public @NotEmpty(message = "you must enter your contact number") @Pattern(regexp = "^[0-9]{10}$", message = "Mobile number must be 10 digits") String getContactNumber() {
+    public String getContactNumber() {
         return contactNumber;
     }
 
-    public void setContactNumber(@NotEmpty(message = "you must enter your contact number") @Pattern(regexp = "^[0-9]{10}$", message = "Mobile number must be 10 digits") String contactNumber) {
+    public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
 
-    public @NotEmpty(message = "your address can not be a null or empty") String getCurrentAddress() {
+    public String getCurrentAddress() {
         return currentAddress;
     }
 
-    public void setCurrentAddress(@NotEmpty(message = "your address can not be a null or empty") String currentAddress) {
+    public void setCurrentAddress(String currentAddress) {
         this.currentAddress = currentAddress;
     }
 
@@ -168,44 +171,52 @@ public class CandidateDto {
         this.dob = dob;
     }
 
-    public @NotEmpty(message = "Email address can not be a null or empty") @Email(message = "Email address should be a valid value") String getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(@NotEmpty(message = "Email address can not be a null or empty") @Email(message = "Email address should be a valid value") String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public @NotEmpty(message = "Father Name can not be a null or empty") String getFatherName() {
+    public String getFatherName() {
         return fatherName;
     }
 
-    public void setFatherName(@NotEmpty(message = "Father Name can not be a null or empty") String fatherName) {
+    public void setFatherName(String fatherName) {
         this.fatherName = fatherName;
     }
 
-    public @NotEmpty(message = "Name can not be a null or empty") @Size(min = 3, max = 30, message = "The length of the customer name should be between 5 and 30") String getFullName() {
+    public String getFullName() {
         return fullName;
     }
 
-    public void setFullName(@NotEmpty(message = "Name can not be a null or empty") @Size(min = 3, max = 30, message = "The length of the customer name should be between 5 and 30") String fullName) {
+    public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 
-    public @NotEmpty(message = "Gender can not be a null or empty") String getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(@NotEmpty(message = "Gender can not be a null or empty") String gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
-    public @NotEmpty(message = "highest Degree can not be a null or empty") String getHighestDegree() {
+    public String getHighestDegree() {
         return highestDegree;
     }
 
-    public void setHighestDegree(@NotEmpty(message = "highest Degree can not be a null or empty") String highestDegree) {
+    public void setHighestDegree(String highestDegree) {
         this.highestDegree = highestDegree;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getLongMemo() {
@@ -216,19 +227,19 @@ public class CandidateDto {
         this.longMemo = longMemo;
     }
 
-    public @NotEmpty(message = "Mother Name can not be a null or empty") String getMotherName() {
+    public String getMotherName() {
         return motherName;
     }
 
-    public void setMotherName(@NotEmpty(message = "Mother Name can not be a null or empty") String motherName) {
+    public void setMotherName(String motherName) {
         this.motherName = motherName;
     }
 
-    public @NotEmpty(message = "Pan card number cannot be null or empty") @Pattern(regexp = "^[A-Z]{5}[0-9]{4}[A-Z]{1}$", message = "Pan card number should be in the format XXXXX9999X") String getPanCard() {
+    public String getPanCard() {
         return panCard;
     }
 
-    public void setPanCard(@NotEmpty(message = "Pan card number cannot be null or empty") @Pattern(regexp = "^[A-Z]{5}[0-9]{4}[A-Z]{1}$", message = "Pan card number should be in the format XXXXX9999X") String panCard) {
+    public void setPanCard(String panCard) {
         this.panCard = panCard;
     }
 
@@ -256,12 +267,11 @@ public class CandidateDto {
         this.paymentType = paymentType;
     }
 
-    @NotNull(message = "Percentage/CGPA cannot be null")
     public double getPercentageCgpa() {
         return percentageCgpa;
     }
 
-    public void setPercentageCgpa(@NotNull(message = "Percentage/CGPA cannot be null") double percentageCgpa) {
+    public void setPercentageCgpa(double percentageCgpa) {
         this.percentageCgpa = percentageCgpa;
     }
 
@@ -297,11 +307,11 @@ public class CandidateDto {
         this.selectedCourse = selectedCourse;
     }
 
-    public @NotEmpty(message = "specialization can not be a null or empty") String getSpecializationMajor() {
+    public String getSpecializationMajor() {
         return specializationMajor;
     }
 
-    public void setSpecializationMajor(@NotEmpty(message = "specialization can not be a null or empty") String specializationMajor) {
+    public void setSpecializationMajor(String specializationMajor) {
         this.specializationMajor = specializationMajor;
     }
 
@@ -313,20 +323,19 @@ public class CandidateDto {
         this.totalPayableAmount = totalPayableAmount;
     }
 
-    public @NotEmpty(message = "university/CollegeName can not be a null or empty") String getUniversityCollegeName() {
+    public String getUniversityCollegeName() {
         return universityCollegeName;
     }
 
-    public void setUniversityCollegeName(@NotEmpty(message = "university/CollegeName can not be a null or empty") String universityCollegeName) {
+    public void setUniversityCollegeName(String universityCollegeName) {
         this.universityCollegeName = universityCollegeName;
     }
 
-    @NotNull(message = "Year of passing cannot be null")
     public int getYearOfPassing() {
         return yearOfPassing;
     }
 
-    public void setYearOfPassing(@NotNull(message = "Year of passing cannot be null") int yearOfPassing) {
+    public void setYearOfPassing(int yearOfPassing) {
         this.yearOfPassing = yearOfPassing;
     }
 }

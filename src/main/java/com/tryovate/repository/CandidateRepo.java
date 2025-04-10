@@ -10,11 +10,8 @@ import java.util.Optional;
 @Repository
 public interface CandidateRepo extends JpaRepository<Candidate, String> {
 
-     public Optional<Candidate> findByEmail(String email);
+     Optional<Candidate> findByEmail(String email);
 
-//     public String findById(String id);
-//
-//     public Optional<Candidate> deleteByEmail(String email);
 
      @Query("SELECT c.id FROM Candidate c WHERE c.id LIKE :prefix% ORDER BY c.id DESC LIMIT 1")
      String findLatestIdForMonth(String prefix);

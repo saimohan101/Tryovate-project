@@ -3,6 +3,7 @@ package com.tryovate.exception;
 import com.tryovate.constants.CandidateConstants;
 import com.tryovate.dto.ErrorResponseDto;
 import com.tryovate.dto.ResponseDto;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -19,9 +20,10 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
-public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler {//extends ResponseEntityExceptionHandler {
 
 //    @Override
 //    protected ResponseEntity<Object> handleMethodArgumentNotValid(
@@ -82,4 +84,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 //        );
 //        return new ResponseEntity<>(errorResponseDTO, HttpStatus.NOT_FOUND);
 //    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ResponseDto> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        String errorMessage = ex.getBindingResult().getAllErrors()
+                .stream()
+                .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                .collect(Collectors.joining(", "));
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ResponseDto("400", errorMessage));
+    }
 }

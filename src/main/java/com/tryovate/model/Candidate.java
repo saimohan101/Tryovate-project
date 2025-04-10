@@ -1,10 +1,10 @@
 package com.tryovate.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
-import lombok.*;
-
-import java.util.List;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
 
 
 @Data
@@ -26,10 +26,10 @@ public class Candidate {
     @Column(name = "Gender")
     private String gender;
 
-    @Column(name = "Contact Number")
+    @Column(name = "Contact Number",unique = true, nullable = false)
     private String contactNumber;
 
-    @Column(name = "Email")
+    @Column(name = "Email", unique = true, nullable = false)
     private String email;
 
     @Column(name = "Current Address")
@@ -47,10 +47,10 @@ public class Candidate {
     @Column(name = "Alternate Number")
     private String alternateNumber;
 
-    @Column(name = "Aadhar Card")
+    @Column(name = "Aadhar Card",unique = true, nullable = false)
     private String aadharCard;
 
-    @Column(name = "Pan Card")
+    @Column(name = "Pan Card",unique = true, nullable = false)
     private String panCard;
 
     @Column(name = "Reference Name")
@@ -71,24 +71,14 @@ public class Candidate {
     private String selectedCourse;
 
     private String paymentType;
-    private String paymentMode;
-    private double partialPaidAmount;
-    private double totalPayableAmount;
-    private double remainingAmount;
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "candidate_courses",
-//            joinColumns = @JoinColumn(name = "candidate_id"),
-//            inverseJoinColumns = @JoinColumn(name = "course_id")
-//    )
-//    private List<Course> selectedCourses;
-//    private String paymentType; // FULL or PARTIAL
-//    private String paymentMode; // ONLINE or OFFLIN
-//    private double partialPaidAmount;
-//    private Double totalPayableAmount;
-//
-//    private double remainingAmount;
+    private String paymentMode;
+
+    private double partialPaidAmount;
+
+    private double totalPayableAmount;
+
+    private double remainingAmount;
 
     public Candidate() {
     }
