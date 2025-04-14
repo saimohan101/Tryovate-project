@@ -84,11 +84,16 @@ public class CandidateServiceImpl implements CandidateService {
         candidate.setAadharCard(candidateDto.getAadharCard());
         candidate.setPanCard(candidateDto.getPanCard());
         candidate.setReference(candidateDto.getReference());
-        candidate.setHighestDegree(candidateDto.getHighestDegree());
+        candidate.setDegree(candidateDto.getDegree());
         candidate.setUniversityCollegeName(candidateDto.getUniversityCollegeName());
         candidate.setYearOfPassing(candidateDto.getYearOfPassing());
         candidate.setSpecializationMajor(candidateDto.getSpecializationMajor());
         candidate.setPercentageCgpa(candidateDto.getPercentageCgpa());
+        candidate.setHighestDegree(candidateDto.getHighestDegree());
+        candidate.setPgUniversityCollegeName(candidateDto.getPgUniversityCollegeName());
+        candidate.setPgYearOfPassing(candidateDto.getPgYearOfPassing());
+        candidate.setPgSpecializationMajor(candidateDto.getPgSpecializationMajor());
+        candidate.setPgPercentageCgpa(candidateDto.getPgPercentageCgpa());
         candidate.setLongMemo(candidateDto.getLongMemo());
         if (candidateDto.getSelectedCourse() != null && !candidateDto.getSelectedCourse().isEmpty()) {
             String courses = String.join(",", candidateDto.getSelectedCourse());
@@ -98,6 +103,7 @@ public class CandidateServiceImpl implements CandidateService {
         }
 
 
+        candidate.setBatchId(candidateDto.getBatchId());
         candidate.setPaymentType(candidateDto.getPaymentType());
         candidate.setPaymentMode(candidateDto.getPaymentMode());
         candidate.setPartialPaidAmount(candidateDto.getPartialPaidAmount());

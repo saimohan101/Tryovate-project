@@ -1,5 +1,6 @@
 package com.tryovate.controller;
 
+import com.tryovate.dto.ForgotPasswordDto;
 import com.tryovate.dto.LoginDto;
 import com.tryovate.model.User;
 import jakarta.servlet.http.HttpSession;
@@ -13,15 +14,38 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
+    private User user = new User("shivb11", "Shiv@2000");
+
     @PostMapping("/login")
-    public ResponseEntity<LoginDto> login(@RequestBody User user) {
-        if ("shivb11".equals(user.getUsername()) && "Shiv@2000".equals(user.getPassword())) {
-            LoginDto response = new LoginDto("Login successful", true);
-            return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<LoginDto> login(@RequestBody User loginUser) {
+//        if ("shivb11".equals(user.getUsername()) && "Shiv@2000".equals(user.getPassword())) {
+//            LoginDto response = new LoginDto("Login successful", true);
+//            return new ResponseEntity<>(response, HttpStatus.OK);
+//        } else {
+//            LoginDto response = new LoginDto("Invalid username or password", false);
+//            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+//        }
+
+        if (user.getUsername().equals(user.getUsername()) &&
+                user.getPassword().equals(loginUser.getPassword())) {
+            return new ResponseEntity<>(new LoginDto("Login successful", true), HttpStatus.OK);
         } else {
-            LoginDto response = new LoginDto("Invalid username or password", false);
-            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(new LoginDto("Invalid username or password", false), HttpStatus.UNAUTHORIZED);
         }
+    }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<LoginDto> forgotPassword(@RequestBody ForgotPasswordDto forgotDto) {
+        if (!user.getUsername().equals(forgotDto.getUsername())) {
+            return new ResponseEntity<>(new LoginDto("Invalid username", false), HttpStatus.BAD_REQUEST);
+        }
+
+        if (!forgotDto.getNewPassword().equals(forgotDto.getConfirmPassword())) {
+            return new ResponseEntity<>(new LoginDto("Passwords do not match", false), HttpStatus.BAD_REQUEST);
+        }
+
+        user.setPassword(forgotDto.getNewPassword());
+        return new ResponseEntity<>(new LoginDto("Password updated successfully", true), HttpStatus.OK);
     }
 
 

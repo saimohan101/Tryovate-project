@@ -26,10 +26,10 @@ public class Candidate {
     @Column(name = "Gender")
     private String gender;
 
-    @Column(name = "Contact Number",unique = true, nullable = false)
+//    @Column(name = "Contact Number",unique = true, nullable = false)
     private String contactNumber;
 
-    @Column(name = "Email", unique = true, nullable = false)
+//    @Column(name = "Email", unique = true, nullable = false)
     private String email;
 
     @Column(name = "Current Address")
@@ -47,16 +47,16 @@ public class Candidate {
     @Column(name = "Alternate Number")
     private String alternateNumber;
 
-    @Column(name = "Aadhar Card",unique = true, nullable = false)
+//    @Column(name = "Aadhar Card",unique = true, nullable = false)
     private String aadharCard;
 
-    @Column(name = "Pan Card",unique = true, nullable = false)
+//    @Column(name = "Pan Card",unique = true, nullable = false)
     private String panCard;
 
     @Column(name = "Reference Name")
     private String reference;
 
-    private String highestDegree;
+    private String degree;
 
     private String universityCollegeName;
 
@@ -64,11 +64,23 @@ public class Candidate {
 
     private String specializationMajor;
 
-    private double percentageCgpa;
+    private String percentageCgpa;
+
+    private String highestDegree;
+
+    private String pgUniversityCollegeName;
+
+    private int pgYearOfPassing;
+
+    private String pgSpecializationMajor;
+
+    private double pgPercentageCgpa;
 
     private String longMemo;
 
     private String selectedCourse;
+
+    private String batchId;
 
     private String paymentType;
 
@@ -80,14 +92,17 @@ public class Candidate {
 
     private double remainingAmount;
 
+
     public Candidate() {
     }
 
-    public Candidate(String aadharCard, String alternateNumber, String contactNumber, String currentAddress, String dob, String email, String fatherName, String fullName, String gender, String highestDegree, String id, String longMemo, String motherName, String panCard, double partialPaidAmount, String paymentMode, String paymentType, double percentageCgpa, String permanentAddress, String reference, double remainingAmount, String selectedCourse, String specializationMajor, double totalPayableAmount, String universityCollegeName, int yearOfPassing) {
+    public Candidate(String aadharCard, String alternateNumber, String batchId, String contactNumber, String currentAddress, String degree, String dob, String email, String fatherName, String fullName, String gender, String highestDegree, String id, String longMemo, String motherName, String panCard, double partialPaidAmount, String paymentMode, String paymentType, String percentageCgpa, String permanentAddress, double pgPercentageCgpa, String pgSpecializationMajor, String pgUniversityCollegeName, int pgYearOfPassing, String reference, double remainingAmount, String selectedCourse, String specializationMajor, double totalPayableAmount, String universityCollegeName, int yearOfPassing) {
         this.aadharCard = aadharCard;
         this.alternateNumber = alternateNumber;
+        this.batchId = batchId;
         this.contactNumber = contactNumber;
         this.currentAddress = currentAddress;
+        this.degree = degree;
         this.dob = dob;
         this.email = email;
         this.fatherName = fatherName;
@@ -103,12 +118,24 @@ public class Candidate {
         this.paymentType = paymentType;
         this.percentageCgpa = percentageCgpa;
         this.permanentAddress = permanentAddress;
+        this.pgPercentageCgpa = pgPercentageCgpa;
+        this.pgSpecializationMajor = pgSpecializationMajor;
+        this.pgUniversityCollegeName = pgUniversityCollegeName;
+        this.pgYearOfPassing = pgYearOfPassing;
         this.reference = reference;
         this.remainingAmount = remainingAmount;
         this.selectedCourse = selectedCourse;
         this.specializationMajor = specializationMajor;
         this.totalPayableAmount = totalPayableAmount;
         this.universityCollegeName = universityCollegeName;
+        this.yearOfPassing = yearOfPassing;
+    }
+
+    public int getYearOfPassing() {
+        return yearOfPassing;
+    }
+
+    public void setYearOfPassing(int yearOfPassing) {
         this.yearOfPassing = yearOfPassing;
     }
 
@@ -128,6 +155,14 @@ public class Candidate {
         this.alternateNumber = alternateNumber;
     }
 
+    public String getBatchId() {
+        return batchId;
+    }
+
+    public void setBatchId(String batchId) {
+        this.batchId = batchId;
+    }
+
     public String getContactNumber() {
         return contactNumber;
     }
@@ -142,6 +177,14 @@ public class Candidate {
 
     public void setCurrentAddress(String currentAddress) {
         this.currentAddress = currentAddress;
+    }
+
+    public String getDegree() {
+        return degree;
+    }
+
+    public void setDegree(String degree) {
+        this.degree = degree;
     }
 
     public String getDob() {
@@ -248,11 +291,11 @@ public class Candidate {
         this.paymentType = paymentType;
     }
 
-    public double getPercentageCgpa() {
+    public String getPercentageCgpa() {
         return percentageCgpa;
     }
 
-    public void setPercentageCgpa(double percentageCgpa) {
+    public void setPercentageCgpa(String percentageCgpa) {
         this.percentageCgpa = percentageCgpa;
     }
 
@@ -262,6 +305,38 @@ public class Candidate {
 
     public void setPermanentAddress(String permanentAddress) {
         this.permanentAddress = permanentAddress;
+    }
+
+    public double getPgPercentageCgpa() {
+        return pgPercentageCgpa;
+    }
+
+    public void setPgPercentageCgpa(double pgPercentageCgpa) {
+        this.pgPercentageCgpa = pgPercentageCgpa;
+    }
+
+    public String getPgSpecializationMajor() {
+        return pgSpecializationMajor;
+    }
+
+    public void setPgSpecializationMajor(String pgSpecializationMajor) {
+        this.pgSpecializationMajor = pgSpecializationMajor;
+    }
+
+    public String getPgUniversityCollegeName() {
+        return pgUniversityCollegeName;
+    }
+
+    public void setPgUniversityCollegeName(String pgUniversityCollegeName) {
+        this.pgUniversityCollegeName = pgUniversityCollegeName;
+    }
+
+    public int getPgYearOfPassing() {
+        return pgYearOfPassing;
+    }
+
+    public void setPgYearOfPassing(int pgYearOfPassing) {
+        this.pgYearOfPassing = pgYearOfPassing;
     }
 
     public String getReference() {
@@ -310,13 +385,5 @@ public class Candidate {
 
     public void setUniversityCollegeName(String universityCollegeName) {
         this.universityCollegeName = universityCollegeName;
-    }
-
-    public int getYearOfPassing() {
-        return yearOfPassing;
-    }
-
-    public void setYearOfPassing(int yearOfPassing) {
-        this.yearOfPassing = yearOfPassing;
     }
 }
