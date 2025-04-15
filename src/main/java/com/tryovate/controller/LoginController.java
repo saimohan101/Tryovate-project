@@ -18,13 +18,6 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginDto> login(@RequestBody User loginUser) {
-//        if ("shivb11".equals(user.getUsername()) && "Shiv@2000".equals(user.getPassword())) {
-//            LoginDto response = new LoginDto("Login successful", true);
-//            return new ResponseEntity<>(response, HttpStatus.OK);
-//        } else {
-//            LoginDto response = new LoginDto("Invalid username or password", false);
-//            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
-//        }
 
         if (user.getUsername().equals(user.getUsername()) &&
                 user.getPassword().equals(loginUser.getPassword())) {
