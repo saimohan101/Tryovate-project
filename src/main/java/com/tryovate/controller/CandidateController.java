@@ -22,7 +22,7 @@ public class CandidateController {
     private CandidateService candidateService;
 
     @PostMapping(value = "/add-candidate",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseDto> createAccount( @RequestBody CandidateDto candidateDto) {
+    public ResponseEntity<ResponseDto> createAccount(@Valid @RequestBody CandidateDto candidateDto) {
         candidateService.saveCandidateDto(candidateDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)

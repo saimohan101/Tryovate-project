@@ -26,10 +26,10 @@ public class Candidate {
     @Column(name = "Gender")
     private String gender;
 
-//    @Column(name = "Contact Number",unique = true, nullable = false)
+    @Column(name = "Contact Number",unique = true, nullable = false)
     private String contactNumber;
 
-//    @Column(name = "Email", unique = true, nullable = false)
+    @Column(name = "Email", unique = true, nullable = false)
     private String email;
 
     @Column(name = "Current Address")
@@ -47,10 +47,10 @@ public class Candidate {
     @Column(name = "Alternate Number")
     private String alternateNumber;
 
-//    @Column(name = "Aadhar Card",unique = true, nullable = false)
+    @Column(name = "Aadhar Card",unique = true, nullable = false)
     private String aadharCard;
 
-//    @Column(name = "Pan Card",unique = true, nullable = false)
+    @Column(name = "Pan Card",unique = true, nullable = false)
     private String panCard;
 
     @Column(name = "Reference Name")
